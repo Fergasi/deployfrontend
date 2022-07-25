@@ -24,9 +24,9 @@ const HomePage = ({
         type='text'
         onChange={(e) => {
           const dateTime = new Date();
-          const newClientMessage = `Message: ${
+          const newClientMessage = `"${
             e.target.value
-          } at time ${dateTime.toString()}`;
+          }" at time ${dateTime.toString()}`;
           setClientMessage(newClientMessage);
         }}
       ></input>
