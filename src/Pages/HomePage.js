@@ -22,7 +22,6 @@ const HomePage = ({
       <br />
       <input
         type='text'
-        value={clientMessage}
         onChange={(e) => {
           const dateTime = new Date();
           const newClientMessage = `Message: ${
