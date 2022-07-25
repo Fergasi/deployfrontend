@@ -30,7 +30,7 @@ function App() {
       },
     });
     const responseJSON = await response.json();
-    console.log("doggo response" + responseJSON.serverMessage);
+    console.log("doggo response: " + responseJSON.serverMessage);
     setDoggoImage(responseJSON.serverMessage);
   };
 
