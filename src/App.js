@@ -3,13 +3,13 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import HomePage from "./Pages/HomePage";
-const urlEndpoint = process.env.DATABASE_URL;
 
 function App() {
   const [clientMessage, setClientMessage] = useState("");
   const [serverMessage, setServerMessage] = useState("");
 
   const sendRecieveMessage = async () => {
+    const urlEndpoint = process.env.DATABASE_URL;
     const response = await fetch(`${urlEndpoint}/post-message`, {
       method: "POST",
       body: JSON.stringify({ clientMessage }),
