@@ -14,6 +14,9 @@ function App() {
     console.log("process.env.DATABASE_URL: " + process.env.DATABASE_URL);
     const response = await fetch(`${urlEndpoint}/post-message`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ clientMessage }),
     });
     const responseJSON = await response.json();
