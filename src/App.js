@@ -19,7 +19,7 @@ function App() {
       body: JSON.stringify({ clientMessage }),
     });
     const responseJSON = await response.json();
-    setServerMessage(responseJSON.serverMessage.dogURL);
+    setServerMessage(responseJSON.serverMessage);
   };
 
   const getDoggoImage = async () => {
@@ -30,8 +30,8 @@ function App() {
       },
     });
     const responseJSON = await response.json();
-    console.log("doggo response: " + responseJSON.serverMessage);
-    setDoggoImage(responseJSON.serverMessage);
+    console.log("doggo response: " + responseJSON.serverMessage.dogURL);
+    setDoggoImage(responseJSON.serverMessage.dogURL);
   };
 
   return (
