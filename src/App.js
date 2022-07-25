@@ -8,6 +8,7 @@ const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 function App() {
   const [clientMessage, setClientMessage] = useState("");
   const [serverMessage, setServerMessage] = useState("");
+  const [doggoImage, setDoggoImage] = useState("");
 
   const sendRecieveMessage = async () => {
     const response = await fetch(`${urlEndpoint}/post-message`, {
@@ -19,6 +20,17 @@ function App() {
     });
     const responseJSON = await response.json();
     setServerMessage(responseJSON.serverMessage);
+  };
+
+  const getDoggoImage = async () => {
+    const response = await fetch(`${urlEndpoint}/get-dog`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseJSON = await response.json();
+    setDoggoImage(responseJSON.serverMessage);
   };
 
   return (
@@ -33,6 +45,8 @@ function App() {
                 setClientMessage={setClientMessage}
                 serverMessage={serverMessage}
                 sendRecieveMessage={sendRecieveMessage}
+                getDoggoImage={getDoggoImage}
+                doggoImage={doggoImage}
               />
             }
           />

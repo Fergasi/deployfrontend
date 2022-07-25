@@ -5,10 +5,26 @@ const HomePage = ({
   setClientMessage,
   serverMessage,
   sendRecieveMessage,
+  getDoggoImage,
+  doggoImage,
 }) => {
   return (
     <div>
       <h2>Home Page</h2>
+      <br />
+      <div>
+        <img src={doggoImage}></img>
+      </div>
+      <br />
+      <button
+        id='getDogButton'
+        type='submit'
+        onClick={() => {
+          getDoggoImage();
+        }}
+      >
+        Get Random Doggo
+      </button>
       <br />
       <h3>Client Message: </h3>
       <div>{clientMessage}</div>
