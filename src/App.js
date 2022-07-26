@@ -3,7 +3,12 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import HomePage from "./Pages/HomePage";
-const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+
+// Heroku
+// const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+
+//LOCAL
+const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 function App() {
   const [clientMessage, setClientMessage] = useState("");
@@ -35,8 +40,8 @@ function App() {
   };
 
   return (
-    <div className='App'>
-      <header className='App-header'>
+    <div className="App">
+      <header className="App-header">
         <Routes>
           <Route
             index

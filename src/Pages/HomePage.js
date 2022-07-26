@@ -17,8 +17,8 @@ const HomePage = ({
       </div>
       <br />
       <button
-        id='getDogButton'
-        type='submit'
+        id="getDogButton"
+        type="submit"
         onClick={() => {
           getDoggoImage();
         }}
@@ -37,7 +37,7 @@ const HomePage = ({
       <label>Client Message Input: </label>
       <br />
       <input
-        type='text'
+        type="text"
         onChange={(e) => {
           const dateTime = new Date();
           const newClientMessage = `"${
@@ -49,9 +49,10 @@ const HomePage = ({
       <br />
       <br />
       <button
-        id='sendMessageButton'
-        type='submit'
+        id="sendMessageButton"
+        type="submit"
         onClick={() => {
+          console.log("cool");
           sendRecieveMessage();
         }}
       >
