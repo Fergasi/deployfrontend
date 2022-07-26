@@ -3,6 +3,8 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import HomePage from "./Pages/HomePage";
+import PostUser from "./Pages/PostUser";
+import NavBar from "./Components/NavBar";
 
 // Heroku
 // const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
@@ -14,6 +16,18 @@ function App() {
   const [clientMessage, setClientMessage] = useState("");
   const [serverMessage, setServerMessage] = useState("");
   const [doggoImage, setDoggoImage] = useState("");
+
+  const postUserData = async (userData) => {
+    const response = await fetch(`${urlEndpoint}/create-user`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userData }),
+    });
+    const responseJSON = await response.json();
+    return responseJSON;
+  };
 
   const sendRecieveMessage = async () => {
     const response = await fetch(`${urlEndpoint}/post-message`, {
@@ -43,19 +57,25 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Routes>
-          <Route
-            index
-            element={
-              <HomePage
-                clientMessage={clientMessage}
-                setClientMessage={setClientMessage}
-                serverMessage={serverMessage}
-                sendRecieveMessage={sendRecieveMessage}
-                getDoggoImage={getDoggoImage}
-                doggoImage={doggoImage}
-              />
-            }
-          />
+          <Route path="/" element={<NavBar />}>
+            <Route
+              index
+              element={
+                <HomePage
+                  clientMessage={clientMessage}
+                  setClientMessage={setClientMessage}
+                  serverMessage={serverMessage}
+                  sendRecieveMessage={sendRecieveMessage}
+                  getDoggoImage={getDoggoImage}
+                  doggoImage={doggoImage}
+                />
+              }
+            />
+            <Route
+              path="/post-user"
+              element={<PostUser postUserData={postUserData} />}
+            />
+          </Route>
         </Routes>
       </header>
     </div>
