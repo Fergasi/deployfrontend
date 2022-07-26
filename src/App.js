@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HomePage from "./Pages/HomePage";
 // Heroku
 //REACT_APP_DATABASE_URL;
@@ -13,6 +13,21 @@ function App() {
   const [clientMessage, setClientMessage] = useState("");
   const [serverMessage, setServerMessage] = useState("");
   const [doggoImage, setDoggoImage] = useState("");
+  const [userList, setUserlist] = useState([]);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      const response = await fetch(`${urlEndpoint}/get-users`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const responseJSON = await response.json();
+      setUserlist(responseJSON.serverMessage);
+    }
+    fetchUsers();
+  }, []);
 
   const sendRecieveMessage = async () => {
     const response = await fetch(`${urlEndpoint}/post-message`, {
@@ -52,6 +67,7 @@ function App() {
                 sendRecieveMessage={sendRecieveMessage}
                 getDoggoImage={getDoggoImage}
                 doggoImage={doggoImage}
+                userList={userList}
               />
             }
           />
