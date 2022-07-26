@@ -3,7 +3,11 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import HomePage from "./Pages/HomePage";
-const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+// Heroku
+//REACT_APP_DATABASE_URL;
+
+//LocalHost
+const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 function App() {
   const [clientMessage, setClientMessage] = useState("");
