@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const HomePage = ({
   clientMessage,
@@ -9,6 +9,7 @@ const HomePage = ({
   doggoImage,
   userList,
 }) => {
+  const [inputValue, setInputValue] = useState("");
   const isVideo = doggoImage.includes("mp4") || doggoImage.includes("webm");
 
   return (
@@ -16,21 +17,23 @@ const HomePage = ({
       <h2>Home Page</h2>
       <br />
       <h3>Client Message: </h3>
-      <div>{clientMessage}</div>
+      <div className="messageContainer">{clientMessage}</div>
       <br />
       <br />
       <h3>Server Message: </h3>
-      <div>{serverMessage}</div>
+      <div className="messageContainer">{serverMessage}</div>
       <br />
       <br />
       <textarea
         placeholder="Enter Client Message..."
+        value={inputValue}
         onChange={(e) => {
           const dateTime = new Date();
           const newClientMessage = `"${
             e.target.value
           }" at time ${dateTime.toString()}`;
           setClientMessage(newClientMessage);
+          setInputValue(e.target.value);
         }}
       ></textarea>
       <br />
@@ -40,6 +43,7 @@ const HomePage = ({
         type="submit"
         onClick={() => {
           sendRecieveMessage();
+          setInputValue("");
         }}
       >
         Submit

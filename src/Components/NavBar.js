@@ -10,11 +10,13 @@ const NavBar = () => {
           <div>
             <Link to="/">Home</Link>
           </div>
+          <br />
           <div>
             <Link to="/post-user">Create New User</Link>
           </div>
         </div>
       </nav>
+      <br />
       <Outlet />
     </div>
   );
