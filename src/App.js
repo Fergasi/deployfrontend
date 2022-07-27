@@ -7,10 +7,10 @@ import PostUser from "./Pages/PostUser";
 import NavBar from "./Components/NavBar";
 
 // Heroku
-// const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 
 //LOCAL
-const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
+// const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 function App() {
   const [clientMessage, setClientMessage] = useState("");
