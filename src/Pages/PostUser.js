@@ -55,7 +55,6 @@ const PostUser = ({ postUserData, setPostUser }) => {
             setMssg(validateUserObj.mssg);
           }
           if (validateUserObj.isValid === true) {
-            console.log(firstName + " " + lastName + " " + email);
             setPostUser(true);
             const { success, message } = await postUserData({
               firstName: firstName,

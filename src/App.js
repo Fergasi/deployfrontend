@@ -15,7 +15,9 @@ const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 function App() {
   const [clientMessage, setClientMessage] = useState("");
   const [serverMessage, setServerMessage] = useState("");
-  const [doggoImage, setDoggoImage] = useState("");
+  const [doggoImage, setDoggoImage] = useState(
+    "https://www.dogstrust.ie/sponsor/_media/mystery-dog/133327dog-gallery.dog-profile-desktop-mystery-2.jpg"
+  );
   const [userList, setUserlist] = useState([]);
   const [postUser, setPostUser] = useState(false);
 
@@ -65,7 +67,7 @@ function App() {
       },
     });
     const responseJSON = await response.json();
-    console.log("dog response: " + responseJSON.serverMessage);
+    console.log(responseJSON.serverMessage);
     setDoggoImage(responseJSON.serverMessage);
   };
 

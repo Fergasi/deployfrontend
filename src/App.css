@@ -3,6 +3,7 @@
 }
 
 .App-header {
+  padding: 50px;
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -15,8 +16,21 @@
 
 img {
   width: 300px;
+  height: auto;
+  transition-timing-function: ease;
+  transition: 1s;
+}
+
+video {
+  width: 300px;
+  height: auto;
 }
 
 #users {
   font-size: smaller;
+  width: 50vw;
+}
+
+#doggoContainer {
+  margin-bottom: 300px;
 }
