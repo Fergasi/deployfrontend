@@ -1,21 +1,36 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HomePage from "./Pages/HomePage";
 import PostUser from "./Pages/PostUser";
 import NavBar from "./Components/NavBar";
 
 // Heroku
-// const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 
 //LOCAL
-const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
+//const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 function App() {
   const [clientMessage, setClientMessage] = useState("");
   const [serverMessage, setServerMessage] = useState("");
   const [doggoImage, setDoggoImage] = useState("");
+  const [userList, setUserlist] = useState([]);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      const response = await fetch(`${urlEndpoint}/get-users`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const responseJSON = await response.json();
+      setUserlist(responseJSON.serverMessage);
+    }
+    fetchUsers();
+  }, []);
 
   const postUserData = async (userData) => {
     const response = await fetch(`${urlEndpoint}/create-user`, {
@@ -68,6 +83,7 @@ function App() {
                   sendRecieveMessage={sendRecieveMessage}
                   getDoggoImage={getDoggoImage}
                   doggoImage={doggoImage}
+                  userList={userList}
                 />
               }
             />
@@ -76,6 +92,7 @@ function App() {
               element={<PostUser postUserData={postUserData} />}
             />
           </Route>
+
         </Routes>
       </header>
     </div>

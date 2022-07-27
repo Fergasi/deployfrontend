@@ -7,24 +7,11 @@ const HomePage = ({
   sendRecieveMessage,
   getDoggoImage,
   doggoImage,
+  userList,
 }) => {
   return (
     <div>
       <h2>Home Page</h2>
-      <br />
-      <div>
-        <img src={doggoImage}></img>
-      </div>
-      <br />
-      <button
-        id="getDogButton"
-        type="submit"
-        onClick={() => {
-          getDoggoImage();
-        }}
-      >
-        Get Random Doggo
-      </button>
       <br />
       <h3>Client Message: </h3>
       <div>{clientMessage}</div>
@@ -34,10 +21,9 @@ const HomePage = ({
       <div>{serverMessage}</div>
       <br />
       <br />
-      <label>Client Message Input: </label>
-      <br />
       <input
-        type="text"
+        type='text'
+        placeholder='Enter Client Message...'
         onChange={(e) => {
           const dateTime = new Date();
           const newClientMessage = `"${
@@ -58,6 +44,67 @@ const HomePage = ({
       >
         Submit
       </button>
+      <br />
+      <br />
+      <div>
+        <h3>User List: </h3>
+        <div id='users'>
+          {userList.map((user) => {
+            return (
+              <div key={user.id}>
+                <br />
+                <div>
+                  <strong>First Name: </strong>
+                  {user.firstName}
+                </div>
+                <br />
+                <div>
+                  <strong>Last Name: </strong>
+                  {user.lastName}
+                </div>
+                <br />
+                <div>
+                  <strong>Email: </strong>
+                  {user.email}
+                </div>
+                <br />
+                <hr />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <h2>Bonus Pup</h2>
+      <div>
+        {doggoImage.indexOf(".mp4") > 0 && (
+          <>
+            <video
+              src={doggoImage}
+              width='600'
+              height='300'
+              autoPlay={true}
+              loop={true}
+            />
+          </>
+        )}
+        {doggoImage.indexOf(".mp4") === -1 && (
+          <>
+            <img src={doggoImage}></img>
+          </>
+        )}
+      </div>
+      <br />
+      <button
+        id='getDogButton'
+        type='submit'
+        onClick={() => {
+          getDoggoImage();
+        }}
+      >
+        Get Random Doggo
+      </button>
+      <br />
+      <br />
     </div>
   );
 };

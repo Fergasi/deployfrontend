@@ -14,5 +14,9 @@
 }
 
 img {
-  width: 50px;
+  width: 300px;
+}
+
+#users {
+  font-size: smaller;
 }
