@@ -35,9 +35,10 @@ const HomePage = ({
       <br />
       <br />
       <button
-        id='sendMessageButton'
-        type='submit'
+        id="sendMessageButton"
+        type="submit"
         onClick={() => {
+          console.log("cool");
           sendRecieveMessage();
         }}
       >

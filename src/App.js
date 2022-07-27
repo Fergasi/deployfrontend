@@ -3,11 +3,14 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import HomePage from "./Pages/HomePage";
-// Heroku
-//REACT_APP_DATABASE_URL;
+import PostUser from "./Pages/PostUser";
+import NavBar from "./Components/NavBar";
 
-//LocalHost
-const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
+// Heroku
+const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+
+//LOCAL
+//const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 function App() {
   const [clientMessage, setClientMessage] = useState("");
@@ -28,6 +31,18 @@ function App() {
     }
     fetchUsers();
   }, []);
+
+  const postUserData = async (userData) => {
+    const response = await fetch(`${urlEndpoint}/create-user`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userData }),
+    });
+    const responseJSON = await response.json();
+    return responseJSON;
+  };
 
   const sendRecieveMessage = async () => {
     const response = await fetch(`${urlEndpoint}/post-message`, {
@@ -54,23 +69,30 @@ function App() {
   };
 
   return (
-    <div className='App'>
-      <header className='App-header'>
+    <div className="App">
+      <header className="App-header">
         <Routes>
-          <Route
-            index
-            element={
-              <HomePage
-                clientMessage={clientMessage}
-                setClientMessage={setClientMessage}
-                serverMessage={serverMessage}
-                sendRecieveMessage={sendRecieveMessage}
-                getDoggoImage={getDoggoImage}
-                doggoImage={doggoImage}
-                userList={userList}
-              />
-            }
-          />
+          <Route path="/" element={<NavBar />}>
+            <Route
+              index
+              element={
+                <HomePage
+                  clientMessage={clientMessage}
+                  setClientMessage={setClientMessage}
+                  serverMessage={serverMessage}
+                  sendRecieveMessage={sendRecieveMessage}
+                  getDoggoImage={getDoggoImage}
+                  doggoImage={doggoImage}
+                  userList={userList}
+                />
+              }
+            />
+            <Route
+              path="/post-user"
+              element={<PostUser postUserData={postUserData} />}
+            />
+          </Route>
+
         </Routes>
       </header>
     </div>
