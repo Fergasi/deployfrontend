@@ -9,6 +9,8 @@ const HomePage = ({
   doggoImage,
   userList,
 }) => {
+  const isVideo = doggoImage.includes("mp4") || doggoImage.includes("webm");
+
   return (
     <div>
       <h2>Home Page</h2>
@@ -21,9 +23,8 @@ const HomePage = ({
       <div>{serverMessage}</div>
       <br />
       <br />
-      <input
-        type='text'
-        placeholder='Enter Client Message...'
+      <textarea
+        placeholder="Enter Client Message..."
         onChange={(e) => {
           const dateTime = new Date();
           const newClientMessage = `"${
@@ -31,14 +32,13 @@ const HomePage = ({
           }" at time ${dateTime.toString()}`;
           setClientMessage(newClientMessage);
         }}
-      ></input>
+      ></textarea>
       <br />
       <br />
       <button
         id="sendMessageButton"
         type="submit"
         onClick={() => {
-          console.log("cool");
           sendRecieveMessage();
         }}
       >
@@ -48,7 +48,7 @@ const HomePage = ({
       <br />
       <div>
         <h3>User List: </h3>
-        <div id='users'>
+        <div id="users">
           {userList.map((user) => {
             return (
               <div key={user.id}>
@@ -75,28 +75,9 @@ const HomePage = ({
         </div>
       </div>
       <h2>Bonus Pup</h2>
-      <div>
-        {doggoImage.indexOf(".mp4") > 0 && (
-          <>
-            <video
-              src={doggoImage}
-              width='600'
-              height='300'
-              autoPlay={true}
-              loop={true}
-            />
-          </>
-        )}
-        {doggoImage.indexOf(".mp4") === -1 && (
-          <>
-            <img src={doggoImage}></img>
-          </>
-        )}
-      </div>
-      <br />
       <button
-        id='getDogButton'
-        type='submit'
+        id="getDogButton"
+        type="submit"
         onClick={() => {
           getDoggoImage();
         }}
@@ -104,6 +85,25 @@ const HomePage = ({
         Get Random Doggo
       </button>
       <br />
+      <br />
+      <div id="doggoContainer">
+        {isVideo && (
+          <>
+            <video
+              src={doggoImage}
+              width="600"
+              height="300"
+              autoPlay={true}
+              loop={true}
+            />
+          </>
+        )}
+        {!isVideo && (
+          <>
+            <img src={doggoImage}></img>
+          </>
+        )}
+      </div>
       <br />
     </div>
   );
