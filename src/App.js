@@ -10,13 +10,14 @@ import NavBar from "./Components/NavBar";
 const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 
 //LOCAL
-//const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
+// const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 function App() {
   const [clientMessage, setClientMessage] = useState("");
   const [serverMessage, setServerMessage] = useState("");
   const [doggoImage, setDoggoImage] = useState("");
   const [userList, setUserlist] = useState([]);
+  const [postUser, setPostUser] = useState(false);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -30,7 +31,7 @@ function App() {
       setUserlist(responseJSON.serverMessage);
     }
     fetchUsers();
-  }, []);
+  }, [postUser]);
 
   const postUserData = async (userData) => {
     const response = await fetch(`${urlEndpoint}/create-user`, {
@@ -89,10 +90,14 @@ function App() {
             />
             <Route
               path="/post-user"
-              element={<PostUser postUserData={postUserData} />}
+              element={
+                <PostUser
+                  postUserData={postUserData}
+                  setPostUser={setPostUser}
+                />
+              }
             />
           </Route>
-
         </Routes>
       </header>
     </div>

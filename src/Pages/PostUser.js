@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import validateUser from "../Utils/Validation";
 
-const PostUser = ({ postUserData }) => {
+const PostUser = ({ postUserData, setPostUser }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ const PostUser = ({ postUserData }) => {
 
   return (
     <div>
-      <div>Create New User</div>
+      <h3>Create New User</h3>
       <br></br>
       <label>First Name</label>
       <br></br>
@@ -56,12 +56,14 @@ const PostUser = ({ postUserData }) => {
           }
           if (validateUserObj.isValid === true) {
             console.log(firstName + " " + lastName + " " + email);
+            setPostUser(true);
             const { success, message } = await postUserData({
               firstName: firstName,
               lastName: lastName,
               email: email,
             });
             setMssg(message);
+            setPostUser(false);
             if (success === true) {
               navigate("/");
             }

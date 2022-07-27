@@ -3,17 +3,17 @@ import { Link, Outlet } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <div>
+    <div id="navBar">
       <nav>
         <h3>NavBar</h3>
-        <ul>
-          <li>
+        <div>
+          <div>
             <Link to="/">Home</Link>
-          </li>
-          <li>
+          </div>
+          <div>
             <Link to="/post-user">Create New User</Link>
-          </li>
-        </ul>
+          </div>
+        </div>
       </nav>
       <Outlet />
     </div>
